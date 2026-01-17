@@ -6,9 +6,9 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
+} from "@/Components/ui/navigation-menu"
+import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet"
+import { Button } from "@/Components/ui/button"
 import { Menu } from "lucide-react"
 
 export default function NavBar() {
