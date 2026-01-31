@@ -1,34 +1,32 @@
-import { useState } from 'react'
-import reactLogo from '../assets/react.svg'
-import viteLogo from '/vite.svg'
 import '../index.css'
+import { useQuery } from '@tanstack/react-query'
+import { ProductCard, type Product } from '@/components/share/ProductCard'
+
+const fetchProducts = async (): Promise<Product[]> => {
+  const res = await fetch("https://fakestoreapi.com/products")
+  if (!res.ok) {
+    throw new Error("Failed to fetch the api")
+  }
+  return res.json()
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { isLoading, data } = useQuery<Product[]>({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  })
+
+  if (isLoading) return <div className="container py-8">Loading...</div>
+  if (!data?.length) return <div className="container py-8">No products found.</div>
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container py-8">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {data.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 

@@ -2,18 +2,19 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "@/app/layouts/RootLayout";
 import App from "../App";
 import DashboardLayout from "../layouts/DashboardLayout";
-import Dashboard from "@/Components/Dashboard";
-import Setting from "@/Components/Dashboard/Setting";
-import Login from "@/Components/Auth/Login";
-import Register from "@/Components/Auth/Register";
-import Team from "@/Components/Teams/Team";
-import NotFound from "@/Components/Error/NotFound";
-import TeamsIndex from "@/Components/Teams/TeamsIndex";
+import Dashboard from "@/components/Dashboard";
+import Setting from "@/components/Dashboard/Setting";
+import Login from "@/components/Auth/Login";
+import Register from "@/components/Auth/Register";
+import Team from "@/components/Teams/Team";
+import NotFound from "@/components/Error/NotFound";
+import TeamsIndex from "@/components/Teams/TeamsIndex";
 import TeamsLayout from "../layouts/TeamsLayout";
-import { teamsIndexLoader } from "@/Components/Teams/teamsIndexLoader";
-import { teamLoader } from "@/Components/Teams/teamLoader";
-import TeamError from "@/Components/Teams/TeamError";
-import TeamEdit from "@/Components/Teams/TeamEdit";
+import { teamsIndexLoader } from "@/components/Teams/teamsIndexLoader";
+import { teamLoader } from "@/components/Teams/teamLoader";
+import TeamError from "@/components/Teams/TeamError";
+import TeamEdit from "@/components/Teams/TeamEdit";
+import SingleProduct from "@/components/Product/SingleProduct";
 
 
 export const AppRoutes = createBrowserRouter([
@@ -65,6 +66,16 @@ export const AppRoutes = createBrowserRouter([
         path: ":userId/edit",
         Component: TeamEdit,
         errorElement: <TeamError />
+      }
+    ]
+  },
+  {
+    path: "product",
+    children: [
+      {
+        path: ":id",
+        Component: SingleProduct,
+
       }
     ]
   },
